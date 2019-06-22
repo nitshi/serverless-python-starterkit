@@ -1,0 +1,25 @@
+# app: serverless-python-starterkit # Specify your Project name here
+service: notifications # Specify service name
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region: us-west-2
+  profile: defaultDev # Specify your AWS profile configured
+
+package:
+  exclude:
+    - '.*/**'
+    - '*.md'
+    - requirements.txt
+  include:
+    - handlers/**
+
+functions:
+  hello:
+    handler: handlers/hello.execute
+    events:
+      - http:
+          path: notifications/hello
+          method: get
